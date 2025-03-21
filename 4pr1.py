@@ -72,10 +72,14 @@ class NoteManager:
                 json.dump(self.notes, file)
 
     def add_note(self, title, content):
-        with self.lock:
-            self.notes.append({"title": title, "content": content})
-            self.logger.log_info(f"Добавлена заметка: {title}")
-            print("Заметка добавлена.")
+            with self.lock:
+                for note in self.notes:
+                    if note["title"] == title:
+                        print("Заметка с таким заголовком уже существует. Введите другой заголовок.")
+                        return
+                self.notes.append({"title": title, "content": content})
+                self.logger.log_info(f"Добавлена заметка: {title}")
+                print("Заметка добавлена.")
 
     def remove_note(self, title):
         with self.lock:

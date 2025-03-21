@@ -169,7 +169,8 @@ def main():
             elif choice == "5":
                 break
             else:
-                print("Неверный выбор.")
+                print("Неверный выбор. Пожалуйста, выберите действие от 1 до 5.")
+                logger.log_error(f"Неверный выбор действия: {choice}")
         except Exception as e:
             logger.log_error(f"Ошибка: {str(e)}")
             print(f"Произошла ошибка: {str(e)}")
